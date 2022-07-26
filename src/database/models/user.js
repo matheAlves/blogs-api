@@ -1,6 +1,6 @@
 /** @param {import('sequelize').Sequelize} sequelize */
 module.exports = (sequelize, DataTypes) => {  
-  const model = sequelize.define("User", {
+  const user = sequelize.define("User", {
     id: {
       autoIncrement: true,
       primaryKey: true,
@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Users'
   });
 
-  User.associate = (models) => {
-    User.hasMany(models.BlogPost,
+  user.associate = (models) => {
+    user.hasMany(models.BlogPost,
       { foreignKey: 'id', as: 'user' });
   };
 
-  return model;
+  return user;
 };
