@@ -33,6 +33,18 @@ const userService = {
 
     return users;    
   },
+
+  async byId(id) {
+    const user = await models.User.findByPk(id, {
+        attributes: { exclude: ['password'] },
+      });
+      if (!user) {
+        const error = new Error('User does not exist');
+        error.name = 'UserNotFound';
+        throw error;
+      }
+      return user;
+    },
 };
 
 module.exports = userService;

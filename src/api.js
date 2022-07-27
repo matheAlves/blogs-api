@@ -12,15 +12,13 @@ app.use('/user', userRoute);
 app.use((err, _req, res, _next) => {
   const { name, message } = err;
   switch (name) {
-    case 'InvalidFields': res.status(400).json({ message });
-      break;
-    case 'ValidationError': res.status(400).json({ message });
-      break;
     case 'TokenNotFound': res.status(401).json({ message });
       break;
     case 'ExistingUser': res.status(409).json({ message });
       break;
-    default: console.warn(err); res.sendStatus(400);
+    case 'UserNotFound': res.status(404).json({ message });
+      break;
+    default: res.status(400).json({ message });
   }
 });
 

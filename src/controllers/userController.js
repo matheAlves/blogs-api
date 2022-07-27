@@ -37,6 +37,26 @@ const userController = {
     const users = await userService.list();
     res.status(200).json(users);
   },
+
+  async byId(req, res) {
+    const token = req.headers.authorization;
+    const { id } = req.params;
+    if (!token) {
+      const error = new Error('Token not found');
+      error.name = 'TokenNotFound';
+      throw error;
+    }
+    try {
+      await authService.readToken(token);
+    } catch (e) {
+      const error = new Error('Expired or invalid token');
+      error.name = 'TokenNotFound';
+      throw error;
+    }
+
+      const user = await userService.byId(id);
+      res.status(200).json(user);
+  },
 };
 
 module.exports = userController;
