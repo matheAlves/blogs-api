@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
   }, { 
-    tableName: 'BlogPosts'
+    tableName: 'BlogPosts',
+    timestamps: false
   });
 
   BlogPost.associate = (models) => {

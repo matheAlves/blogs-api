@@ -14,6 +14,11 @@ const authService = {
     const { data } = jwt.verify(token, secret);
     return data;
   },
+
+  async verifyToken(token) {
+    const { data } = jwt.verify(token, secret);
+    return data;
+  },
 };
 
 module.exports = authService;
