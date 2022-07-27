@@ -9,6 +9,11 @@ const userController = {
 
     res.status(201).json({ name });
   },
+
+  async list(req, res) {
+    const categories = await categoryService.list();
+    res.status(200).json(categories);
+  },
 };
 
 module.exports = userController;
