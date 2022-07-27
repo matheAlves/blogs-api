@@ -4,19 +4,17 @@ const { DataTypes } = require('sequelize');
 const attributes = {
   postId: {
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     references: {
       model: 'BlogPosts',
       key: 'id'
     }
   },
-  categoryId: {
+  categoryId: { 
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     references: {
       model: 'Categories',
       key: 'id'
