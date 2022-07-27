@@ -9,6 +9,11 @@ const authService = {
     const token = jwt.sign(payload, secret);
     return token;
   },
+
+  async readToken(token) {
+    const { data } = jwt.verify(token, secret);
+    return data;
+  },
 };
 
 module.exports = authService;
