@@ -1,20 +1,23 @@
 const express = require('express');
 require('express-async-errors');
 const loginRoute = require('./routes/loginRoute');
+const userRoute = require('./routes/userRoute');
 
 const app = express();
 app.use(express.json());
 
 app.use('/login', loginRoute);
+app.use('/user', userRoute);
 
 app.use((err, _req, res, _next) => {
-  const { name } = err;
+  const { name, message } = err;
   switch (name) {
-    case 'InvalidFields': res.status(400).json({ message: 'Invalid fields' });
+    case 'InvalidFields': res.status(400).json({ message });
       break;
-    case 'ValidationError': res.status(400).json({ message: 'Some required fields are missing' });
+    case 'ValidationError': res.status(400).json({ message });
       break;
-    
+    case 'ExistingUser': res.status(409).json({ message });
+      break;
     default: console.warn(err); res.sendStatus(400);
   }
 });
